@@ -8,8 +8,14 @@ module ExceptionHandler
 
     rescue_from ActiveRecord::RecordInvalid do |e|
       first_error_message = e.message.split(", ")[0]
-      display_message = first_error_message.slice(first_error_message.index(":") + 2..first_error_message.size - 1)
-      json_response({ message: display_message }, :unprocessable_entity)
+      display_message = first_error_message.slice(
+        first_error_message.index(":") + 2..first_error_message.size - 1
+      )
+      if display_message.include?("has already been taken")
+        json_response({ message: display_message }, :conflict)
+      else
+        json_response({ message: display_message }, :unprocessable_entity)
+      end
     end
   end
 end

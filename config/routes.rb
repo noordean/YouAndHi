@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   scope "/api/v1" do
     get "/users" => "users#index"
     post "/user/signup" => "users#create"
+    post "/user/signin" => "users#signin"
   end
 end
