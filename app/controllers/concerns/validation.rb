@@ -6,6 +6,7 @@ module Validation
           message: "Username must be supplied"
         }, :unprocessable_entity
       )
+
       true
     elsif password.nil?
       json_response(
@@ -13,6 +14,7 @@ module Validation
           message: "Password must be supplied"
         }, :unprocessable_entity
       )
+
       true
     end
   end

@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-  # attr_accessor :password_digest
-
   has_secure_password
   validates_presence_of :username, :email, :phone_number
   validates :username, uniqueness: true, format: {
