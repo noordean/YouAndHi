@@ -3,9 +3,14 @@ require "rails_helper"
 RSpec.describe UsersController, type: :request do
   let!(:users) { create :user }
   let(:json) { JSON.parse(response.body) }
+  let(:headers) do
+    {
+      "token" => JsonWebToken.encode(user_id: 1)
+    }
+  end
 
   describe "GET /users" do
-    before { get "/api/v1/users" }
+    before { get "/api/v1/users", headers: headers }
 
     it "returns users" do
       expect(json).not_to be_empty

@@ -4,5 +4,7 @@ Rails.application.routes.draw do
     get "/users" => "users#index"
     post "/user/signup" => "users#create"
     post "/user/signin" => "users#signin"
+
+    post "/group" => "groups#create"
   end
 end
