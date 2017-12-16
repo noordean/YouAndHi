@@ -2,33 +2,28 @@ require "rails_helper"
 
 RSpec.describe GroupsController, type: :request do
   let(:json) { JSON.parse(response.body) }
-
-  describe "POST /group" do
-    let(:valid_group_attributes) do
-      {
-        group_name: "group test",
-        group_description: "for testing group"
-      }
-    end
-    let(:invalid_group_attributes) do
-      {
-        group_name: "123456",
-        group_description: "for testing group"
-      }
-    end
-    let(:headers) do
-      {
-        "token" => JsonWebToken.encode(user_id: 1)
-      }
-    end
-
+  let(:user) { create :user }
+  let(:headers) { set_header(user.id) }
+  let(:valid_group_attributes) do
+    {
+      group_name: "group test",
+      group_description: "for testing group"
+    }
+  end
+  let(:invalid_group_attributes) do
+    {
+      group_name: "123456",
+      group_description: "for testing group"
+    }
+  end
+  describe "POST /groups/new" do
     context "when the request is valid" do
       before do
-        post "/api/v1/group",
+        post "/api/v1/groups/new",
              params: valid_group_attributes, headers: headers
       end
 
-      it "creates a user" do
+      it "creates a group" do
         expect(json["group_name"]).to eq("group test")
         expect(json["group_description"]).to eq("for testing group")
       end
@@ -40,14 +35,15 @@ RSpec.describe GroupsController, type: :request do
 
     context "when the request is invalid" do
       before do
-        post "/api/v1/group",
+        post "/api/v1/groups/new",
              params: invalid_group_attributes,
              headers: headers
       end
 
       it "returns a validation failure message" do
         expect(json["message"]).to eq(
-          "Group name can contain only letters and space and be of at least two characters"
+          "Group name can contain only letters and space " \
+             "and be of at least two characters"
         )
       end
 
@@ -57,7 +53,7 @@ RSpec.describe GroupsController, type: :request do
     end
 
     context "when token is not supplied" do
-      before { post "/api/v1/group", params: invalid_group_attributes }
+      before { post "/api/v1/groups/new", params: invalid_group_attributes }
 
       it "returns a validation failure message" do
         expect(json["message"]).to eq(

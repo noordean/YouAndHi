@@ -4,7 +4,7 @@ RSpec.describe UsersController, type: :request do
   let!(:users) { create :user }
   let(:json) { JSON.parse(response.body) }
 
-  describe "POST /user/signin" do
+  describe "POST /users/login" do
     let(:invalid_user) do
       {
         username: "invalid_username",
@@ -19,7 +19,7 @@ RSpec.describe UsersController, type: :request do
     end
 
     context "when the request is invalid" do
-      before { post "/api/v1/user/signin", params: invalid_user }
+      before { post "/api/v1/users/login", params: invalid_user }
 
       it "creates a user" do
         expect(json["message"]).to eq("Incorrect username/password combination")
@@ -31,7 +31,7 @@ RSpec.describe UsersController, type: :request do
     end
 
     context "when the request is valid" do
-      before { post "/api/v1/user/signin", params: valid_user }
+      before { post "/api/v1/users/login", params: valid_user }
 
       it "creates a user" do
         expect(json["message"]).to eq("Login successful!")
