@@ -3,8 +3,8 @@ require "rails_helper"
 RSpec.describe UsersController, type: :request do
   let(:json) { JSON.parse(response.body) }
 
-  describe "POST /user/signup" do
-    let(:valid_attributes) do
+  describe "POST /users/new" do
+    let(:valid_user_attributes) do
       {
         username: "muinat",
         email: "muinat@gmail.com",
@@ -12,7 +12,7 @@ RSpec.describe UsersController, type: :request do
         password: "ibro123"
       }
     end
-    let(:invalid_attributes) do
+    let(:invalid_user_attributes) do
       {
         username: "muinat",
         email: "muinatgmail.com",
@@ -22,7 +22,7 @@ RSpec.describe UsersController, type: :request do
     end
 
     context "when the request is valid" do
-      before { post "/api/v1/user/signup", params: valid_attributes }
+      before { post "/api/v1/users/new", params: valid_user_attributes }
 
       it "creates a user" do
         expect(json["username"]).to eq("muinat")
@@ -34,7 +34,7 @@ RSpec.describe UsersController, type: :request do
     end
 
     context "when the request is invalid" do
-      before { post "/api/v1/user/signup", params: invalid_attributes }
+      before { post "/api/v1/users/new", params: invalid_user_attributes }
 
       it "returns a validation failure message" do
         expect(json["message"]).to eq("Email must be valid")

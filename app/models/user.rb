@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
   validates_presence_of :username, :email, :phone_number
-  validates :username, uniqueness: true, format: {
+  validates :username, uniqueness: { case_sensitive: false }, format: {
     with: /\A[a-zA-Z]{5,15}\z/,
     message: "must contain letters and be between 5-15 characters"
   }
