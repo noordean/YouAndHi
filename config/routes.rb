@@ -6,5 +6,6 @@ Rails.application.routes.draw do
     post "/users/login" => "users#login"
 
     post "/groups/new" => "groups#create"
+    post "/messages/new" => "messages#create"
   end
 end
