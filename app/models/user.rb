@@ -1,4 +1,11 @@
 class User < ApplicationRecord
+  has_many :groups,
+           class_name: "Group",
+           foreign_key: "created_by"
+  has_many :messages,
+           class_name: "Message",
+           foreign_key: "posted_by"
+
   has_secure_password
   validates_presence_of :username, :email, :phone_number
   validates :username, uniqueness: { case_sensitive: false }, format: {
