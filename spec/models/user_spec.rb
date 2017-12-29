@@ -12,5 +12,6 @@ RSpec.describe User, type: :model do
   context "when validating associations" do
     it { is_expected.to have_many(:messages) }
     it { is_expected.to have_many(:groups) }
+    it { is_expected.to have_many(:group_members) }
   end
 end

@@ -7,5 +7,6 @@ Rails.application.routes.draw do
 
     post "/groups/new" => "groups#create"
     post "/messages/new" => "messages#create"
+    post "/groups/:group_id/add_users" => "group_members#create"
   end
 end
