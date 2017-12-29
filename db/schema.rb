@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171217091552) do
+ActiveRecord::Schema.define(version: 20171228221611) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,13 @@ ActiveRecord::Schema.define(version: 20171217091552) do
   enable_extension "dict_xsyn"
   enable_extension "unaccent"
   enable_extension "pg_stat_statements"
+
+  create_table "group_members", force: :cascade do |t|
+    t.integer "member"
+    t.integer "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "groups", force: :cascade do |t|
     t.string "group_name"
@@ -64,6 +71,10 @@ ActiveRecord::Schema.define(version: 20171217091552) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "group_members", "groups"
+  add_foreign_key "group_members", "groups"
+  add_foreign_key "group_members", "users", column: "member"
+  add_foreign_key "group_members", "users", column: "member"
   add_foreign_key "groups", "users", column: "created_by"
   add_foreign_key "messages", "groups"
   add_foreign_key "messages", "users", column: "posted_by"
