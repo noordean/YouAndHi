@@ -34,6 +34,16 @@ class UsersController < ApplicationController
     end
   end
 
+  # GET /api/v1/users/groups
+  def get_user_groups
+    group_members = User.find(get_current_user).group_members.includes(:group)
+    group_details = []
+    group_members.each do |group_member|
+      group_details << group_member.group
+    end
+    json_response(group_details)
+  end
+
   private
 
   def user_params

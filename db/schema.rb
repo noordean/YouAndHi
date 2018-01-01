@@ -72,8 +72,6 @@ ActiveRecord::Schema.define(version: 20171228221611) do
   end
 
   add_foreign_key "group_members", "groups"
-  add_foreign_key "group_members", "groups"
-  add_foreign_key "group_members", "users", column: "member"
   add_foreign_key "group_members", "users", column: "member"
   add_foreign_key "groups", "users", column: "created_by"
   add_foreign_key "messages", "groups"
