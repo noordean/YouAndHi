@@ -30,6 +30,7 @@ class GroupMembersController < ApplicationController
       group_member = GroupMember.create!(group_member_params)
       group_members << group_member
     end
+
     group_members
   end
 

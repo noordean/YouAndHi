@@ -10,6 +10,16 @@ class GroupsController < ApplicationController
     json_response(@group, :created)
   end
 
+  # GET /api/v1/group/group_id/members
+  def get_members
+    members = Group.find(params[:group_id]).group_members.includes(:user)
+    members_details = []
+    members.each do |member|
+      members_details << member.user
+    end
+    json_response(members_details.pluck(:id, :username, :email, :phone_number))
+  end
+
   private
 
   def group_params
