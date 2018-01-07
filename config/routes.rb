@@ -10,5 +10,8 @@ Rails.application.routes.draw do
     resources :groups
 
     resources :messages
+    resources :status_posts
+
+    post "/status_posts/:id/add_comment" => "status_comments#create"
   end
 end

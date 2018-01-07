@@ -8,6 +8,12 @@ class User < ApplicationRecord
   has_many :group_members,
            class_name: "GroupMember",
            foreign_key: "member"
+  has_many :status_posts,
+           class_name: "StatusPost",
+           foreign_key: "posted_by"
+  has_many :status_comments,
+           class_name: "StatusComment",
+           foreign_key: "commented_by"
 
   has_secure_password
   validates_presence_of :username, :email, :phone_number
