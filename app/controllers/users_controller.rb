@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   skip_before_action :authorize_user, :get_current_user, only: %i(create login)
-  include Validation
 
   # GET /api/v1/users
   def index

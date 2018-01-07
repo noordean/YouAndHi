@@ -2,6 +2,7 @@ class ApplicationController < ActionController::API
   before_action :authorize_user, :get_current_user
   include Response
   include ExceptionHandler
+  include Validation
 
   def authorize_user
     unless request.headers[:HTTP_TOKEN].present?
