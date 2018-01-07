@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   scope "/api/v1" do
     post "/users/login" => "users#login"
     get "/users/groups" => "users#get_user_groups"
+    get "/users/:id/status_posts" => "users#get_user_status_posts"
     resources :users
   
     post "/groups/:group_id/add_users" => "group_members#create"
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
     resources :status_posts
 
     post "/status_posts/:id/add_comment" => "status_comments#create"
+    get "/status_posts/:id/status_comments" => "status_posts#get_status_post_comments"
     resources :status_comments
   end
 end

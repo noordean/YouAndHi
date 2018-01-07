@@ -43,6 +43,12 @@ class StatusPostsController < ApplicationController
     end
   end
 
+  # GET /api/v1/status_posts/:id/status_comments
+  def get_status_post_comments
+    status_comments = StatusPost.find(params[:id]).status_comments
+    json_response(status_comments)
+  end
+
   private
 
   def status_post_params

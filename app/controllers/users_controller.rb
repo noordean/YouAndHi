@@ -43,6 +43,12 @@ class UsersController < ApplicationController
     json_response(group_details)
   end
 
+  # GET /api/v1/users/:id/status_posts
+  def get_user_status_posts
+    status_posts = User.find(params[:id]).status_posts
+    json_response(status_posts)
+  end
+
   private
 
   def user_params
