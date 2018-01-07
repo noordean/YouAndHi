@@ -13,5 +13,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many(:messages) }
     it { is_expected.to have_many(:groups) }
     it { is_expected.to have_many(:group_members) }
+    it { is_expected.to have_many(:status_posts) }
+    it { is_expected.to have_many(:status_comments) }
   end
 end
