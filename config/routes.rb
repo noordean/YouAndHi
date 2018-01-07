@@ -13,5 +13,6 @@ Rails.application.routes.draw do
     resources :status_posts
 
     post "/status_posts/:id/add_comment" => "status_comments#create"
+    resources :status_comments
   end
 end

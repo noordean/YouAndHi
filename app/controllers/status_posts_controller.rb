@@ -9,6 +9,40 @@ class StatusPostsController < ApplicationController
     json_response(post, :created)
   end
 
+  # PUT "/api/v1/status_posts/:id"
+  def update
+    status_post = status_post_owner(params[:id])
+    if !status_post
+      json_response({
+                      message: "This can only be edited by the post owner"
+                    },
+                    :forbidden)
+    elsif params[:post].nil?
+      json_response({
+                      message: "You need to supply the post"
+                    }, :bad_request)
+    else
+      status_post.update(post: params[:post])
+      json_response(message: "Post updated successfully")
+    end
+  end
+
+  # DELETE "/api/v1/status_posts/:id"
+  def destroy
+    status_post = status_post_owner(params[:id])
+    if !status_post
+      json_response({
+                      message: "This can only be deleted by the post owner"
+                    }, :forbidden)
+    elsif StatusPost.destroy(params[:id])
+      json_response(message: "Post deleted successfully")
+    else
+      json_response({
+                      message: "Unable to delete post"
+                    }, :internal_server_error)
+    end
+  end
+
   private
 
   def status_post_params
