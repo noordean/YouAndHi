@@ -16,10 +16,10 @@ RSpec.describe GroupsController, type: :request do
       group_description: "for testing group"
     }
   end
-  describe "POST /groups/new" do
+  describe "POST /groups" do
     context "when the request is valid" do
       before do
-        post "/api/v1/groups/new",
+        post "/api/v1/groups",
              params: valid_group_attributes, headers: headers
       end
 
@@ -35,7 +35,7 @@ RSpec.describe GroupsController, type: :request do
 
     context "when the request is invalid" do
       before do
-        post "/api/v1/groups/new",
+        post "/api/v1/groups",
              params: invalid_group_attributes,
              headers: headers
       end
@@ -53,7 +53,7 @@ RSpec.describe GroupsController, type: :request do
     end
 
     context "when token is not supplied" do
-      before { post "/api/v1/groups/new", params: invalid_group_attributes }
+      before { post "/api/v1/groups", params: invalid_group_attributes }
 
       it "returns a validation failure message" do
         expect(json["message"]).to eq(

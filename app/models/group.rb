@@ -1,7 +1,7 @@
 class Group < ApplicationRecord
   belongs_to :user, foreign_key: :created_by
-  has_many :messages
-  has_many :group_members
+  has_many :messages, dependent: :destroy
+  has_many :group_members, dependent: :destroy
 
   validates_presence_of :group_name, :group_description
   validates :group_name, uniqueness: { case_sensitive: false }, format: {

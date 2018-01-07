@@ -1,9 +1,7 @@
 class GroupMembersController < ApplicationController
-  include Validation
-
   # POST /api/v1/groups/group_id/add_users
   def create
-    if the_group_creator?(params[:group_id])
+    if group_creator(params[:group_id])
       if all_group_user_params[:member].is_a?(Array)
         group_members = handle_array_of_members(all_group_user_params[:member])
         json_response(group_members, :created)
