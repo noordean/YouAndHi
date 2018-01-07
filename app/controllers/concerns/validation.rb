@@ -44,4 +44,18 @@ module Validation
       return message
     end
   end
+
+  def status_post_owner(status_post_id)
+    status_post = StatusPost.find(status_post_id)
+    if status_post.posted_by == get_current_user
+      return status_post
+    end
+  end
+
+  def status_comment_owner(status_comment_id)
+    status_comment = StatusComment.find(status_comment_id)
+    if status_comment.commented_by == get_current_user
+      return status_comment
+    end
+  end
 end
