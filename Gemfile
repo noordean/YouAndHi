@@ -18,8 +18,8 @@ gem 'puma', '~> 3.7'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-
-gem 'pg'
+gem 'sqlite3', group: :development
+gem 'pg', group: :production
 gem 'rails_12factor'
 gem 'dotenv-rails'
 gem 'jwt'

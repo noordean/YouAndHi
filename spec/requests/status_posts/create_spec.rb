@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe StatusPostsController, type: :request do
+RSpec.describe V1::StatusPostsController, type: :request do
   let(:user) { create :user }
   let(:headers) { set_header(user.id) }
   let(:json) { JSON.parse(response.body) }
@@ -12,7 +12,7 @@ RSpec.describe StatusPostsController, type: :request do
       }
     end
     before do
-      post "/api/v1/status_posts",
+      post "/status_posts",
            params: valid_status_post_attributes,
            headers: headers
     end

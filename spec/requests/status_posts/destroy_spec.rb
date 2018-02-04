@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe StatusPostsController, type: :request do
+RSpec.describe V1::StatusPostsController, type: :request do
   let(:json) { JSON.parse(response.body) }
   let(:user) { create :user }
   let(:status_post) { create :status_post, posted_by: user.id }
@@ -8,7 +8,7 @@ RSpec.describe StatusPostsController, type: :request do
 
   describe "DELETE /status_posts/:id" do
     before do
-      delete "/api/v1/status_posts/#{status_post.id}", headers: headers
+      delete "/status_posts/#{status_post.id}", headers: headers
     end
 
     it "deletes group" do

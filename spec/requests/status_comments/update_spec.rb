@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe StatusCommentsController, type: :request do
+RSpec.describe V1::StatusCommentsController, type: :request do
   let(:json) { JSON.parse(response.body) }
   let(:user) { create :user }
   let(:status_post) { create :status_post, posted_by: user.id }
@@ -18,7 +18,7 @@ RSpec.describe StatusCommentsController, type: :request do
 
   describe "PUT /status_comments/:id" do
     before do
-      put "/api/v1/status_comments/#{status_comment.id}",
+      put "/status_comments/#{status_comment.id}",
           params: valid_comment_update_attributes, headers: headers
     end
 

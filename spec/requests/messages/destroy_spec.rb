@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe MessagesController, type: :request do
+RSpec.describe V1::MessagesController, type: :request do
   let(:json) { JSON.parse(response.body) }
   let(:user) { create :user }
   let(:group) { create :group, created_by: user.id }
@@ -9,7 +9,7 @@ RSpec.describe MessagesController, type: :request do
 
   describe "DELETE /messages/:id" do
     before do
-      delete "/api/v1/messages/#{message.id}", headers: headers
+      delete "/messages/#{message.id}", headers: headers
     end
 
     it "updates group" do

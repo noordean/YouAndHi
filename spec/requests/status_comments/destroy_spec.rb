@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe StatusCommentsController, type: :request do
+RSpec.describe V1::StatusCommentsController, type: :request do
   let(:json) { JSON.parse(response.body) }
   let(:user) { create :user }
   let(:status_post) { create :status_post, posted_by: user.id }
@@ -13,7 +13,7 @@ RSpec.describe StatusCommentsController, type: :request do
 
   describe "DELETE /status_comments/:id" do
     before do
-      delete "/api/v1/status_comments/#{status_comment.id}", headers: headers
+      delete "/status_comments/#{status_comment.id}", headers: headers
     end
 
     it "deletes comment" do

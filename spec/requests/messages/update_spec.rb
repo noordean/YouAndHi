@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe MessagesController, type: :request do
+RSpec.describe V1::MessagesController, type: :request do
   let(:json) { JSON.parse(response.body) }
   let(:user) { create :user }
   let(:group) { create :group, created_by: user.id }
@@ -15,7 +15,7 @@ RSpec.describe MessagesController, type: :request do
 
   describe "PUT /messages/:id" do
     before do
-      put "/api/v1/messages/#{message.id}",
+      put "/messages/#{message.id}",
           params: valid_message_update_attributes, headers: headers
     end
 

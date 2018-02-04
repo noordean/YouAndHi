@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe UsersController, type: :request do
+RSpec.describe V1::UsersController, type: :request do
   let!(:user) { create :user }
   let!(:group) { create :group, created_by: user.id }
   let!(:group_member) do
@@ -9,8 +9,8 @@ RSpec.describe UsersController, type: :request do
   let(:json) { JSON.parse(response.body) }
   let(:headers) { set_header(user.id) }
 
-  describe "GET /api/v1/users/groups" do
-    before { get "/api/v1/users/groups", headers: headers }
+  describe "GET /users/groups" do
+    before { get "/users/groups", headers: headers }
 
     it "returns groups a logged-in user belongs" do
       expect(json).not_to be_empty

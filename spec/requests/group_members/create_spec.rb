@@ -1,12 +1,12 @@
 require "rails_helper"
 
-RSpec.describe GroupMembersController, type: :request do
+RSpec.describe V1::GroupMembersController, type: :request do
   let(:json) { JSON.parse(response.body) }
   let(:user) { create :user }
   let(:group) { create :group, created_by: user.id }
   let(:headers) { set_header(user.id) }
 
-  describe "POST /api/v1/groups/group_id/add_users" do
+  describe "POST /groups/group_id/add_users" do
     let(:valid_group_member_attributes) do
       {
         member: user.id,
@@ -20,7 +20,7 @@ RSpec.describe GroupMembersController, type: :request do
 
     context "when the request is valid" do
       before do
-        post "/api/v1/groups/#{group.id}/add_users",
+        post "/groups/#{group.id}/add_users",
              params: valid_group_member_attributes,
              headers: headers
       end
@@ -37,7 +37,7 @@ RSpec.describe GroupMembersController, type: :request do
 
     context "when the member does not exist" do
       before do
-        post "/api/v1/groups/#{group.id}/add_users",
+        post "/groups/#{group.id}/add_users",
              params: invalid_group_member_attributes,
              headers: headers
       end
@@ -53,7 +53,7 @@ RSpec.describe GroupMembersController, type: :request do
 
     context "when the group does not exist" do
       before do
-        post "/api/v1/groups/5/add_users",
+        post "/groups/5/add_users",
              params: invalid_group_member_attributes,
              headers: headers
       end
