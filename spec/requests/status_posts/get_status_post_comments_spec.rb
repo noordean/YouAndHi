@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe StatusPostsController, type: :request do
+RSpec.describe V1::StatusPostsController, type: :request do
   let!(:user) { create :user }
   let!(:status_post) { create :status_post, posted_by: user.id }
   let!(:status_comment) do
@@ -13,7 +13,7 @@ RSpec.describe StatusPostsController, type: :request do
 
   describe "GET /api/v1/status_posts/:id/status_comments" do
     before do
-      get "/api/v1/status_posts/#{status_post.id}/status_comments",
+      get "/status_posts/#{status_post.id}/status_comments",
           headers: headers
     end
 

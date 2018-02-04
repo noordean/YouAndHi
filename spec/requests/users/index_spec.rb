@@ -1,12 +1,12 @@
 require "rails_helper"
 
-RSpec.describe UsersController, type: :request do
+RSpec.describe V1::UsersController, type: :request do
   let!(:users) { create :user }
   let(:json) { JSON.parse(response.body) }
   let(:headers) { set_header(1) }
 
   describe "GET /users" do
-    before { get "/api/v1/users", headers: headers }
+    before { get "/users", headers: headers }
 
     it "returns users" do
       expect(json).not_to be_empty

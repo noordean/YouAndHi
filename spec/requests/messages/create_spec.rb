@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe MessagesController, type: :request do
+RSpec.describe V1::MessagesController, type: :request do
   let(:user) { create :user }
   let(:group) { create :group, created_by: user.id }
   let!(:group_member) do
@@ -27,7 +27,7 @@ RSpec.describe MessagesController, type: :request do
 
     context "when the request is valid" do
       before do
-        post "/api/v1/messages",
+        post "/messages",
              params: valid_message_attributes,
              headers: headers
       end
@@ -43,7 +43,7 @@ RSpec.describe MessagesController, type: :request do
 
     context "when the request is invalid" do
       before do
-        post "/api/v1/messages",
+        post "/messages",
              params: invalid_message_attributes,
              headers: headers
       end

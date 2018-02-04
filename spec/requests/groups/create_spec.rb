@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe GroupsController, type: :request do
+RSpec.describe V1::GroupsController, type: :request do
   let(:json) { JSON.parse(response.body) }
   let(:user) { create :user }
   let(:headers) { set_header(user.id) }
@@ -19,7 +19,7 @@ RSpec.describe GroupsController, type: :request do
   describe "POST /groups" do
     context "when the request is valid" do
       before do
-        post "/api/v1/groups",
+        post "/groups",
              params: valid_group_attributes, headers: headers
       end
 
@@ -35,7 +35,7 @@ RSpec.describe GroupsController, type: :request do
 
     context "when the request is invalid" do
       before do
-        post "/api/v1/groups",
+        post "/groups",
              params: invalid_group_attributes,
              headers: headers
       end
@@ -53,7 +53,7 @@ RSpec.describe GroupsController, type: :request do
     end
 
     context "when token is not supplied" do
-      before { post "/api/v1/groups", params: invalid_group_attributes }
+      before { post "/groups", params: invalid_group_attributes }
 
       it "returns a validation failure message" do
         expect(json["message"]).to eq(

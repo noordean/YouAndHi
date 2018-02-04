@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe GroupsController, type: :request do
+RSpec.describe V1::GroupsController, type: :request do
   let(:json) { JSON.parse(response.body) }
   let(:user) { create :user }
   let(:group) { create :group, created_by: user.id }
@@ -14,7 +14,7 @@ RSpec.describe GroupsController, type: :request do
 
   describe "PUT /groups/:id" do
     before do
-      put "/api/v1/groups/#{group.id}",
+      put "/groups/#{group.id}",
           params: valid_group_update_attributes, headers: headers
     end
 

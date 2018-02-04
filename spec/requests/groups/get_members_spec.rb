@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe GroupsController, type: :request do
+RSpec.describe V1::GroupsController, type: :request do
   let!(:user) { create :user }
   let!(:group) { create :group, created_by: user.id }
   let!(:group_member) do
@@ -9,8 +9,8 @@ RSpec.describe GroupsController, type: :request do
   let(:json) { JSON.parse(response.body) }
   let(:headers) { set_header(user.id) }
 
-  describe "GET /api/v1/group/group_id/members" do
-    before { get "/api/v1/groups/#{group.id}/members", headers: headers }
+  describe "GET /group/group_id/members" do
+    before { get "/groups/#{group.id}/members", headers: headers }
 
     it "returns members for the specified group" do
       expect(json).not_to be_empty
